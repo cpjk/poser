@@ -5,15 +5,20 @@ defmodule Command do
   def _new(["project" | rest]), do: _new_project(rest)
   def _new(["question" | rest]), do: _new_question(rest)
 
-  defp _resolve_question(args) do
+  defp _resolve_question(_args) do
     # prompt for details
   end
 
-  defp _new_question(args) do
-    # prompt for details
+  defp _new_question(_args) do
+    project = IO.gets("Project? ") |> String.strip
+    name = IO.gets("Name? ") |> String.strip
+    text = IO.gets("Text? ") |> String.strip
+
+    question = %Question{name: name, project: project, text: text}
+    QuestionOps.save question
   end
 
-  defp _new_project(args) do
-    # prompt for details
+  defp _new_project(_args) do
+    name = IO.gets "Name? "
   end
 end
