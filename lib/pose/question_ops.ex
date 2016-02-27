@@ -12,8 +12,8 @@ defmodule QuestionOps do
   end
 
   def save(question) do
-    {:ok, json} = Poison.encode(question)
-    File.write(file_path(question), json)
+    with {:ok, json} <- Poison.encode(question),
+      do: File.write(file_path(question), json)
   end
 
   defp load_questions do
