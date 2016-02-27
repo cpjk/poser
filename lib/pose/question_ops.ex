@@ -16,12 +16,33 @@ defmodule QuestionOps do
       do: File.write(file_path(question), json)
   end
 
-  defp load_questions do
-    # load questions from stored json text files
-    # returns a list of Questions
+  def load_questions do
+    {:ok, file_names} = File.ls(question_dir)
+
+    file_names
+    |> Enum.map(fn(file_name) ->
+      (file_name |> load_json |> json_to_question)
+    end)
+  end
+
+  defp load_json(file_name) do
+    with {:ok, json} <- File.read(Path.join(question_dir, file_name)), do: json
+  end
+
+  defp json_to_question(json) do
+    with {:ok, question} <- Poison.decode!(json, as: %Question{}), do: question
   end
 
   defp file_path(question = %Question{}) do
-    question.name
+    # replace groups of spaces and hyphens with single underscores
+    filename = question.name
+    |> String.replace(~r/[\s-]/, "_")
+    |> String.replace(~r/_+/, "_")
+
+    Path.join([question_dir, filename])
+  end
+
+  defp question_dir do
+    Path.join([System.user_home, ".pose/questions"])
   end
 end
