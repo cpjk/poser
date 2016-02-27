@@ -1,11 +1,7 @@
 defmodule Question do
   defstruct name: "", project: "", text: ""
 
-  def new(args) do
-    # create a new question with some text
-  end
-
-  def resolve(args) do
+  def resolve(question = %Question{}) do
     # resolve the question
   end
 end
