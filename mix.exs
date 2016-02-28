@@ -1,13 +1,13 @@
-defmodule Pose.Mixfile do
+defmodule Poser.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :pose,
+    [app: :poser,
      version: "0.0.1",
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     escript: [main_module: Pose],
+     escript: [main_module: Poser],
      deps: deps]
   end
 

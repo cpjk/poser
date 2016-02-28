@@ -1,6 +1,6 @@
-defmodule PoseTest do
+defmodule PoserTest do
   use ExUnit.Case
-  doctest Pose
+  doctest Poser
 
   test "the truth" do
     assert 1 + 1 == 2

@@ -43,6 +43,6 @@ defmodule QuestionOps do
   end
 
   defp question_dir do
-    Path.join([System.user_home, ".pose/questions"])
+    Path.join([System.user_home, ".poser/questions"])
   end
 end
